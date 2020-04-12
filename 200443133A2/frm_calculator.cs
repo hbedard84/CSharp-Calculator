@@ -13,8 +13,8 @@ namespace _200443133A2
     public partial class frm_calculator : Form
     {
         Calculator calculator = new Calculator();
-        decimal memory = 0;
-        decimal result;
+        double memory = 0;
+        double result;
 
         public frm_calculator()
         {
