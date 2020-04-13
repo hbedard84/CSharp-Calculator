@@ -67,6 +67,8 @@
             this.txt_display.Size = new System.Drawing.Size(351, 65);
             this.txt_display.TabIndex = 0;
             this.txt_display.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txt_display.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_display_KeyDown);
+            this.txt_display.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_display_KeyPress);
             // 
             // txt_memory
             // 
