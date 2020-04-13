@@ -13,6 +13,7 @@ namespace _200443133A2
     public partial class frm_calculator : Form
     {
         Calculator calculator = new Calculator();
+        //MemoryCalculator memoryCalculator = new MemoryCalculator();
         double memory = 0;
         double result;
 
@@ -94,27 +95,44 @@ namespace _200443133A2
 
         private void btn_mc_Click(object sender, EventArgs e)
         {
+            calculator.MemoryClear();
             txt_memory.Clear();
-            memory = 0;
         }
 
         private void btn_mr_Click(object sender, EventArgs e)
         {
-            txt_display.Text = memory.ToString();
-            txt_memory.Text = "M";
+            memory = calculator.MemoryRecall();
+            if (!double.IsNaN(memory))
+            {
+                if (txt_display.Text != "")
+                {
+                    string last_char = txt_display.Text.Substring(txt_display.Text.Length - 1, 1);
+
+                    if (last_char != "+" || last_char != "-" || last_char != "x" || last_char != "/")
+                    {
+                        txt_display.Text += "+";
+                    }
+                }
+                txt_display.Text += memory.ToString();
+
+            }
+           
         }
 
         private void btn_ms_Click(object sender, EventArgs e)
         {
             result = calculator.Calculate(txt_display.Text);
-            memory = result;
+            txt_display.Text = result.ToString();
+            calculator.MemorySave(result);
+           
             txt_memory.Text = "M";
         }
 
         private void btn_mPlus_Click(object sender, EventArgs e)
         {
             result = calculator.Calculate(txt_display.Text);
-            memory += result;
+            txt_display.Text = result.ToString();
+            calculator.MemoryPlus(result);
             txt_memory.Text = "M";
         }
 
@@ -152,8 +170,15 @@ namespace _200443133A2
 
         private void btn_equals_Click(object sender, EventArgs e)
         {
+           // line1 += line2;
             result = calculator.Calculate(txt_display.Text);
-            txt_display.Text = result.ToString();
+            if (double.IsNaN(result) || double.IsInfinity(result)|| double.IsNegativeInfinity(result) ||double.IsPositiveInfinity(result)) 
+            {
+                txt_display.Text = "Cannot divide by 0";
+            }
+            else {
+                txt_display.Text = result.ToString(); }
+
         }
 
         //Method to allow for keyboard and numpad inputs

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace _200443133A2
 {
-    class Calculator
+    class Calculator : MemoryCalculator
     {
         double result;
         
@@ -17,7 +17,7 @@ namespace _200443133A2
         List<string> inputOperators = new List<string>();
         
 
-        public double Calculate(String formula)
+        public double Calculate(string formula)
         {
             //split the formula into substrings, separated by operators
             string[] formula_substrings = Regex.Split(formula, @"(\(|\)|(?<!e|E)-|(?<!e|E)\+|\*|/|\s+)");
