@@ -13,7 +13,6 @@ namespace _200443133A2
     public partial class frm_calculator : Form
     {
         Calculator calculator = new Calculator();
-        //MemoryCalculator memoryCalculator = new MemoryCalculator();
         double memory = 0;
         double result;
 
@@ -80,6 +79,7 @@ namespace _200443133A2
         private void btn_sign_Click(object sender, EventArgs e)
         {
             txt_display.Text = calculator.PlusMinus(txt_display.Text);
+            FocusAndDeselect();
         }
 
         private void btn_back_Click(object sender, EventArgs e)
@@ -96,6 +96,7 @@ namespace _200443133A2
         {
             calculator.MemoryClear();
             txt_memory.Clear();
+            FocusAndDeselect();
         }
 
         private void btn_mr_Click(object sender, EventArgs e)
@@ -119,7 +120,7 @@ namespace _200443133A2
                 txt_display.Text += memory.ToString();
 
             }
-           
+            FocusAndDeselect();
         }
 
         private void btn_ms_Click(object sender, EventArgs e)
@@ -129,6 +130,7 @@ namespace _200443133A2
             calculator.MemorySave(result);
            
             txt_memory.Text = "M";
+            FocusAndDeselect();
         }
 
         private void btn_mPlus_Click(object sender, EventArgs e)
@@ -137,6 +139,7 @@ namespace _200443133A2
             txt_display.Text = result.ToString();
             calculator.MemoryPlus(result);
             txt_memory.Text = "M";
+            FocusAndDeselect();
         }
 
         private void btn_divide_Click(object sender, EventArgs e)
@@ -169,6 +172,7 @@ namespace _200443133A2
         {
             result = calculator.Invert(txt_display.Text);
             txt_display.Text = result.ToString();
+            FocusAndDeselect();
         }
 
         private void btn_equals_Click(object sender, EventArgs e)
@@ -206,15 +210,15 @@ namespace _200443133A2
 
                 if (allOperators.Contains(i))
                 {
-                    if (allOperators.Contains(operatorTest2Split[0].ToString()))
+                    if (allOperators.Contains(operatorTest2Split[1].ToString()))
                     {
                         if (i == "-")
                         {
-                            InputBack();
+                            //InputBack();
                         }
                         else
                         {
-                            InputBack();
+                            //InputBack();
                             InputBack();
                         }
 
@@ -226,8 +230,8 @@ namespace _200443133A2
                 return;
             }
             txt_display.Text += i;
-            
-            txt_display.Focus();
+
+            FocusAndDeselect();
         }
 
         public void InputBack()
@@ -236,7 +240,7 @@ namespace _200443133A2
             {
                 string current_display = txt_display.Text;
                 txt_display.Text = current_display.Remove(current_display.Length - 1);
-                txt_display.Focus();
+                FocusAndDeselect();
             }
         }
 
@@ -245,7 +249,7 @@ namespace _200443133A2
             txt_display.Clear();
             txt_memory.Clear();
             calculator.MemoryClear();
-            txt_display.Focus();
+            FocusAndDeselect();
         }
 
         public void Equals()
@@ -260,8 +264,16 @@ namespace _200443133A2
                 txt_display.Text = result.ToString();
             }
             screenReset = true;
-            txt_display.Focus();
+            FocusAndDeselect();
         }
+
+        public void FocusAndDeselect()
+        {
+            txt_display.Focus();
+            txt_display.DeselectAll();
+        }
+
+
 
         // Boolean flag used to determine when a character other than a number or operator is entered.
         public bool handledKey = true;
@@ -439,5 +451,7 @@ namespace _200443133A2
                 e.Handled = true;
             }
         }
+
+        
     }
 }

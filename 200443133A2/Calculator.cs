@@ -25,11 +25,9 @@ namespace _200443133A2
             bool SecondOperatorTest = false;  //is there two operators side by side
             bool SecondOperator = false; //Operators verified as side by side as true, add minus to next number 
 
-            // 6 x - 3
-
             //if substring is an operator, add it to the inputOperators list, otherwise add it to the inputNumbers list, 
             foreach (string substring in formula_substrings)
-            //foreach ( var substring in Regex.Matches(formula, @"([*+/\-)(])|([0-9]+)"))
+            
             {
                 if (operators.Contains(substring) ) 
                     //is the substring a operator

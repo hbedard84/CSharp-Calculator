@@ -59,7 +59,8 @@
             // 
             // txt_display
             // 
-            this.txt_display.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_display.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txt_display.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_display.Location = new System.Drawing.Point(25, 25);
             this.txt_display.Multiline = true;
             this.txt_display.Name = "txt_display";
@@ -72,6 +73,7 @@
             // 
             // txt_memory
             // 
+            this.txt_memory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_memory.Location = new System.Drawing.Point(25, 107);
             this.txt_memory.Multiline = true;
             this.txt_memory.Name = "txt_memory";
@@ -80,6 +82,7 @@
             // 
             // btn_decimal
             // 
+            this.btn_decimal.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_decimal.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btn_decimal.Location = new System.Drawing.Point(217, 353);
             this.btn_decimal.Name = "btn_decimal";
@@ -91,6 +94,7 @@
             // 
             // btn_sign
             // 
+            this.btn_sign.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_sign.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btn_sign.Location = new System.Drawing.Point(158, 353);
             this.btn_sign.Name = "btn_sign";
@@ -102,6 +106,7 @@
             // 
             // btn_0
             // 
+            this.btn_0.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_0.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btn_0.Location = new System.Drawing.Point(99, 353);
             this.btn_0.Name = "btn_0";
@@ -113,6 +118,7 @@
             // 
             // btn_3
             // 
+            this.btn_3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_3.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btn_3.Location = new System.Drawing.Point(217, 288);
             this.btn_3.Name = "btn_3";
@@ -124,6 +130,7 @@
             // 
             // btn_2
             // 
+            this.btn_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_2.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btn_2.Location = new System.Drawing.Point(158, 288);
             this.btn_2.Name = "btn_2";
@@ -135,6 +142,7 @@
             // 
             // btn_1
             // 
+            this.btn_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_1.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btn_1.Location = new System.Drawing.Point(99, 288);
             this.btn_1.Name = "btn_1";
@@ -146,6 +154,7 @@
             // 
             // btn_6
             // 
+            this.btn_6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_6.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btn_6.Location = new System.Drawing.Point(217, 225);
             this.btn_6.Name = "btn_6";
@@ -157,6 +166,7 @@
             // 
             // btn_5
             // 
+            this.btn_5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_5.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btn_5.Location = new System.Drawing.Point(158, 225);
             this.btn_5.Name = "btn_5";
@@ -168,6 +178,7 @@
             // 
             // btn_4
             // 
+            this.btn_4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_4.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btn_4.Location = new System.Drawing.Point(99, 225);
             this.btn_4.Name = "btn_4";
@@ -179,6 +190,7 @@
             // 
             // btn_9
             // 
+            this.btn_9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_9.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btn_9.Location = new System.Drawing.Point(217, 164);
             this.btn_9.Name = "btn_9";
@@ -190,6 +202,7 @@
             // 
             // btn_8
             // 
+            this.btn_8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_8.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btn_8.Location = new System.Drawing.Point(158, 164);
             this.btn_8.Name = "btn_8";
@@ -201,6 +214,7 @@
             // 
             // btn_equals
             // 
+            this.btn_equals.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_equals.ForeColor = System.Drawing.Color.Red;
             this.btn_equals.Location = new System.Drawing.Point(331, 288);
             this.btn_equals.Name = "btn_equals";
@@ -212,6 +226,7 @@
             // 
             // btn_7
             // 
+            this.btn_7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_7.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btn_7.Location = new System.Drawing.Point(99, 164);
             this.btn_7.Name = "btn_7";
@@ -223,6 +238,7 @@
             // 
             // btn_invert
             // 
+            this.btn_invert.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_invert.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btn_invert.Location = new System.Drawing.Point(331, 225);
             this.btn_invert.Name = "btn_invert";
@@ -234,6 +250,7 @@
             // 
             // btn_sqrt
             // 
+            this.btn_sqrt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_sqrt.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btn_sqrt.Location = new System.Drawing.Point(331, 164);
             this.btn_sqrt.Name = "btn_sqrt";
@@ -245,6 +262,7 @@
             // 
             // btn_add
             // 
+            this.btn_add.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_add.ForeColor = System.Drawing.Color.Red;
             this.btn_add.Location = new System.Drawing.Point(273, 353);
             this.btn_add.Name = "btn_add";
@@ -256,6 +274,7 @@
             // 
             // btn_subtract
             // 
+            this.btn_subtract.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_subtract.ForeColor = System.Drawing.Color.Red;
             this.btn_subtract.Location = new System.Drawing.Point(273, 288);
             this.btn_subtract.Name = "btn_subtract";
@@ -267,28 +286,31 @@
             // 
             // btn_multiply
             // 
+            this.btn_multiply.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_multiply.ForeColor = System.Drawing.Color.Red;
             this.btn_multiply.Location = new System.Drawing.Point(273, 225);
             this.btn_multiply.Name = "btn_multiply";
             this.btn_multiply.Size = new System.Drawing.Size(44, 46);
             this.btn_multiply.TabIndex = 14;
-            this.btn_multiply.Text = "X";
+            this.btn_multiply.Text = "x";
             this.btn_multiply.UseVisualStyleBackColor = true;
             this.btn_multiply.Click += new System.EventHandler(this.btn_multiply_Click);
             // 
             // btn_divide
             // 
+            this.btn_divide.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_divide.ForeColor = System.Drawing.Color.Red;
             this.btn_divide.Location = new System.Drawing.Point(273, 164);
             this.btn_divide.Name = "btn_divide";
             this.btn_divide.Size = new System.Drawing.Size(44, 46);
             this.btn_divide.TabIndex = 8;
-            this.btn_divide.Text = "/";
+            this.btn_divide.Text = "÷";
             this.btn_divide.UseVisualStyleBackColor = true;
             this.btn_divide.Click += new System.EventHandler(this.btn_divide_Click);
             // 
             // btn_clear
             // 
+            this.btn_clear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_clear.ForeColor = System.Drawing.Color.Red;
             this.btn_clear.Location = new System.Drawing.Point(217, 107);
             this.btn_clear.Name = "btn_clear";
@@ -300,6 +322,7 @@
             // 
             // btn_back
             // 
+            this.btn_back.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_back.ForeColor = System.Drawing.Color.Red;
             this.btn_back.Location = new System.Drawing.Point(99, 107);
             this.btn_back.Name = "btn_back";
@@ -311,6 +334,7 @@
             // 
             // btn_mPlus
             // 
+            this.btn_mPlus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_mPlus.ForeColor = System.Drawing.Color.Red;
             this.btn_mPlus.Location = new System.Drawing.Point(25, 353);
             this.btn_mPlus.Name = "btn_mPlus";
@@ -322,6 +346,7 @@
             // 
             // btn_ms
             // 
+            this.btn_ms.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_ms.ForeColor = System.Drawing.Color.Red;
             this.btn_ms.Location = new System.Drawing.Point(25, 288);
             this.btn_ms.Name = "btn_ms";
@@ -333,6 +358,7 @@
             // 
             // btn_mr
             // 
+            this.btn_mr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_mr.ForeColor = System.Drawing.Color.Red;
             this.btn_mr.Location = new System.Drawing.Point(25, 225);
             this.btn_mr.Name = "btn_mr";
@@ -344,6 +370,7 @@
             // 
             // btn_mc
             // 
+            this.btn_mc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_mc.ForeColor = System.Drawing.Color.Red;
             this.btn_mc.Location = new System.Drawing.Point(25, 164);
             this.btn_mc.Name = "btn_mc";
