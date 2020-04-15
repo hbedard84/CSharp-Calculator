@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,6 +16,8 @@ namespace _200443133A2
         Calculator calculator = new Calculator();
         double memory = 0;
         double result;
+        string formulaLine = "";
+        string activeNumberInputLine = "";
 
         public frm_calculator()
         {
@@ -73,18 +76,20 @@ namespace _200443133A2
 
         private void btn_decimal_Click(object sender, EventArgs e)
         {
-            InputCapture(".");
+            string output = calculator.Decimal(activeNumberInputLine);
+            InputCapture(output);
         }
 
         private void btn_sign_Click(object sender, EventArgs e)
         {
-            txt_display.Text = calculator.PlusMinus(txt_display.Text);
-            FocusAndDeselect();
+
+            activeNumberInputLine = calculator.PlusMinus(activeNumberInputLine);
+            DisplayValues();
         }
 
         private void btn_back_Click(object sender, EventArgs e)
         {
-            InputBack();
+            InputBackLine2();
         }
 
         private void btn_clear_Click(object sender, EventArgs e)
@@ -96,7 +101,7 @@ namespace _200443133A2
         {
             calculator.MemoryClear();
             txt_memory.Clear();
-            FocusAndDeselect();
+            DisplayValues();
         }
 
         private void btn_mr_Click(object sender, EventArgs e)
@@ -120,7 +125,7 @@ namespace _200443133A2
                 txt_display.Text += memory.ToString();
 
             }
-            FocusAndDeselect();
+            DisplayValues();
         }
 
         private void btn_ms_Click(object sender, EventArgs e)
@@ -130,7 +135,7 @@ namespace _200443133A2
             calculator.MemorySave(result);
            
             txt_memory.Text = "M";
-            FocusAndDeselect();
+            DisplayValues();
         }
 
         private void btn_mPlus_Click(object sender, EventArgs e)
@@ -139,7 +144,7 @@ namespace _200443133A2
             txt_display.Text = result.ToString();
             calculator.MemoryPlus(result);
             txt_memory.Text = "M";
-            FocusAndDeselect();
+            DisplayValues();
         }
 
         private void btn_divide_Click(object sender, EventArgs e)
@@ -172,7 +177,7 @@ namespace _200443133A2
         {
             result = calculator.Invert(txt_display.Text);
             txt_display.Text = result.ToString();
-            FocusAndDeselect();
+            DisplayValues();
         }
 
         private void btn_equals_Click(object sender, EventArgs e)
@@ -184,95 +189,107 @@ namespace _200443133A2
         bool screenReset = false;
         public void InputCapture(string i)
         {
-            string[] allOperators = { "+", "-", "/", "*", ".", "^" };
-            string[] neighbourOperators = { "+", "/", "*", ".", "^" };
+            string[] allOperators = { "+", "-", "/", "*", "^", "(", ")" };
+            string[] neighbourOperators = { "+", "/", "*", ".", "^", "-" };
             string[] startingOperators = { "+", "/", "*", "^" };
+            
 
-            if (screenReset == true && !allOperators.Contains(i))
+            if (allOperators.Contains(i))
+            //If operator is pressed
             {
-                txt_display.Clear();
-            }
-            screenReset = false;
-
-            if (txt_display.Text != "" && neighbourOperators.Contains(i))
-            {
-                string operatorTest = txt_display.Text.Substring(txt_display.Text.Length - 1);
-                if (neighbourOperators.Contains(operatorTest))
+                if (activeNumberInputLine == "")
                 {
-                    InputBack();
-                }
-            }
-            if (txt_display.Text.Length > 1)
-            {
-                string operatorTest2 = txt_display.Text.Substring(txt_display.Text.Length - 2);
-                char[] operatorTest2Split = operatorTest2.ToCharArray();
-
-
-                if (allOperators.Contains(i))
-                {
-                    if (allOperators.Contains(operatorTest2Split[1].ToString()))
+                    if (formulaLine == "" && startingOperators.Contains(i))
                     {
-                        if (i == "-")
+                        return;
+                    }
+                    else if (formulaLine != "")
+                    {
+                        string lastInput = formulaLine.Substring(formulaLine.Length - 1); //
+                        if (neighbourOperators.Contains(lastInput))
                         {
-                            //InputBack();
+                            InputBackLine1();
                         }
-                        else
-                        {
-                            //InputBack();
-                            InputBack();
-                        }
-
+                        formulaLine += i;
                     }
                 }
+                else
+                {
+                    formulaLine += activeNumberInputLine + i;
+                }
+                activeNumberInputLine = "";
             }
-            else if (txt_display.Text == "" && startingOperators.Contains(i))
+            else
+            //If Anything else is pressed (numbers)
             {
-                return;
+                activeNumberInputLine += i;
             }
-            txt_display.Text += i;
 
-            FocusAndDeselect();
+            DisplayValues();
+
         }
 
-        public void InputBack()
+        public void DisplayValues()
         {
-            if (txt_display.Text != "")
+
+            txt_display.Text = formulaLine+activeNumberInputLine;
+            txt_display.Focus();
+            txt_display.DeselectAll();
+        }
+
+        public void InputBackLine1()
+        {
+            if (formulaLine != "")
             {
-                string current_display = txt_display.Text;
-                txt_display.Text = current_display.Remove(current_display.Length - 1);
-                FocusAndDeselect();
+                formulaLine = formulaLine.Remove(formulaLine.Length - 1);
+                DisplayValues();
+            }
+        }
+        public void InputBackLine2()
+        {
+            if (activeNumberInputLine != "")
+            {
+                activeNumberInputLine = activeNumberInputLine.Remove(activeNumberInputLine.Length - 1);
+                DisplayValues();
+            }
+            else
+            {
+                InputBackLine1();
             }
         }
 
         public void CalcReset()
         {
             txt_display.Clear();
+            formulaLine = "";
+            activeNumberInputLine = "";
             txt_memory.Clear();
             calculator.MemoryClear();
-            FocusAndDeselect();
+            DisplayValues();
+            
         }
-
+        
         public void Equals()
         {
+            DisplayValues();
             result = calculator.Calculate(txt_display.Text);
+
             if (double.IsNaN(result) || double.IsInfinity(result) || double.IsNegativeInfinity(result) || double.IsPositiveInfinity(result))
             {
                 txt_display.Text = "Cannot divide by 0";
             }
             else
             {
-                txt_display.Text = result.ToString();
+                activeNumberInputLine = result.ToString();
             }
+
+            formulaLine = "";
             screenReset = true;
-            FocusAndDeselect();
+
+            DisplayValues();
         }
 
-        public void FocusAndDeselect()
-        {
-            txt_display.Focus();
-            txt_display.DeselectAll();
-        }
-
+       
 
 
         // Boolean flag used to determine when a character other than a number or operator is entered.
@@ -437,7 +454,7 @@ namespace _200443133A2
             }
             if (e.KeyCode == Keys.Back)
             {
-                InputBack();
+                InputBackLine2();
             }
 
         }

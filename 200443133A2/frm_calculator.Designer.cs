@@ -64,6 +64,7 @@
             this.txt_display.Location = new System.Drawing.Point(25, 25);
             this.txt_display.Multiline = true;
             this.txt_display.Name = "txt_display";
+            this.txt_display.ReadOnly = true;
             this.txt_display.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txt_display.Size = new System.Drawing.Size(351, 65);
             this.txt_display.TabIndex = 0;
@@ -77,8 +78,10 @@
             this.txt_memory.Location = new System.Drawing.Point(25, 107);
             this.txt_memory.Multiline = true;
             this.txt_memory.Name = "txt_memory";
+            this.txt_memory.ReadOnly = true;
             this.txt_memory.Size = new System.Drawing.Size(55, 41);
             this.txt_memory.TabIndex = 1;
+            this.txt_memory.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btn_decimal
             // 
@@ -94,7 +97,7 @@
             // 
             // btn_sign
             // 
-            this.btn_sign.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_sign.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_sign.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btn_sign.Location = new System.Drawing.Point(158, 353);
             this.btn_sign.Name = "btn_sign";
@@ -250,7 +253,7 @@
             // 
             // btn_sqrt
             // 
-            this.btn_sqrt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_sqrt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_sqrt.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btn_sqrt.Location = new System.Drawing.Point(331, 164);
             this.btn_sqrt.Name = "btn_sqrt";
@@ -413,6 +416,7 @@
             this.Controls.Add(this.txt_memory);
             this.Controls.Add(this.txt_display);
             this.Name = "frm_calculator";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Calculator";
             this.ResumeLayout(false);
             this.PerformLayout();
