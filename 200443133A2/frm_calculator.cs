@@ -351,6 +351,7 @@ namespace _200443133A2
         }
 
         /// <summary>
+        /// Combines the formulaline and activeline into text display. 
         /// Moves the current character in the active line to the formula line, 
         /// refocuses on the display, and removes highlighting from characters.
         /// </summary>
@@ -607,10 +608,6 @@ namespace _200443133A2
                 InputCapture("-");
             }
             if (e.KeyCode == Keys.Enter)
-            {
-                Equals();
-            }
-            if (e.KeyCode == Keys.Return)
             {
                 Equals();
             }
