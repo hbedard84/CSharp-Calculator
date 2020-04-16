@@ -196,10 +196,10 @@ namespace _200443133A2
        
         public void InputCapture(string i)
         {
-            string[] allOperators = { "+", "-", "/", "*", "^", "(", ")" };
+            string[] allOperators = { "+", "-", "/", "*", "^" };
             string[] neighbourOperators = { "+", "/", "*", ".", "^", "-" };
             string[] startingOperators = { "+", "/", "*", "^", ")" };
-            
+
 
             if (allOperators.Contains(i))
             //If operator is pressed
@@ -213,18 +213,9 @@ namespace _200443133A2
                     else if (formulaLine != "")
                     {
                         string lastInput = formulaLine.Substring(formulaLine.Length - 1); //
-                        if (neighbourOperators.Contains(lastInput) && i != "(" )
+                        if (neighbourOperators.Contains(lastInput))
                         {
                             InputBackLine1();
-                        }
-                        if (lastInput == ")" && !neighbourOperators.Contains(i))
-                        {
-                            formulaLine += "*";
-                        }
-                        lastInput = formulaLine.Substring(formulaLine.Length - 1); //
-                        if (i == "(" && !neighbourOperators.Contains(lastInput))
-                        {
-                            formulaLine += "*";
                         }
                         formulaLine += i;
                     }
@@ -235,18 +226,82 @@ namespace _200443133A2
                 }
                 else
                 {
+                    formulaLine += activeNumberLine + i;
+                }
+                activeNumberLine = "";
+                screenReset = false;
+            }
+
+            else if ( i == "(" || i == ")")
+            //If input is a bracket    
+            {
+                if (formulaLine != "") //Partial Formula
+                {
                     if (i == "(")
+                        //Open Bracekts
+                    {
+                        if (activeNumberLine == "")
+                        {
+                            string lastInput = formulaLine.Substring(formulaLine.Length - 1);
+                            if (neighbourOperators.Contains(lastInput))
+                            {
+                                formulaLine += activeNumberLine + i;
+                            }
+                            else if (lastInput == "(")
+                            {
+                                formulaLine += activeNumberLine + i;
+                            }
+                            else
+                            {
+                                formulaLine += activeNumberLine + "*" + i;
+                            }
+                        }
+                        else
+                        {
+                            formulaLine += activeNumberLine + "*" + i;
+                        }
+                    }
+                    else
+                    //Close Brackets
+                    {
+                        if (activeNumberLine == "")
+                        {
+                            string lastInput = formulaLine.Substring(formulaLine.Length - 1);
+                            if (neighbourOperators.Contains(lastInput))
+                            {
+                                InputBackLine1();
+                            }
+                            formulaLine += activeNumberLine + i;
+                        }
+                        else
+                        {
+                            formulaLine += activeNumberLine + i;
+                        }
+                    }
+                }
+                else //No Formula
+                {
+                    if (activeNumberLine != "")
                     {
                         formulaLine += activeNumberLine + "*" + i;
                     }
                     else
                     {
-                        formulaLine += activeNumberLine + i;
+                        if (i == "(")
+                        {
+                            formulaLine += activeNumberLine + i;
+                        }
+                        if (i == ")")
+                        {
+                            return;
+                        }
                     }
                 }
+
                 activeNumberLine = "";
                 screenReset = false;
             }
+
             else
             //If Anything else is pressed (numbers)
             {
@@ -256,7 +311,7 @@ namespace _200443133A2
                     screenReset = false;
                 }
 
-                if ( formulaLine != "" && formulaLine.Substring(formulaLine.Length - 1) == ")")
+                if (formulaLine != "" && formulaLine.Substring(formulaLine.Length - 1) == ")")
                 {
                     formulaLine += "*";
                 }
