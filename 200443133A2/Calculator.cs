@@ -12,6 +12,7 @@ namespace _200443133A2
     class Calculator : MemoryCalculator
     {
         double result;
+        double err;
         
         string[] operators = { "+", "*", "/", "-" , "(", ")" };
         List<double> inputNumbers = new List<double>();
@@ -52,8 +53,8 @@ namespace _200443133A2
         public double Invert(String formula)
         {
             result = Calculate(formula);
-            result = 1 / result;
-            return result;
+            double invertResult = 1 / result;
+            return invertResult;
         }
 
         public string PlusMinus(String activeNumber)

@@ -17,7 +17,8 @@ namespace _200443133A2
         double memory = 0;
         double result;
         string formulaLine = "";
-        string activeNumberInputLine = "";
+        string activeNumberLine = "";
+        bool screenReset = false;
 
         public frm_calculator()
         {
@@ -76,14 +77,13 @@ namespace _200443133A2
 
         private void btn_decimal_Click(object sender, EventArgs e)
         {
-            string output = calculator.Decimal(activeNumberInputLine);
+            string output = calculator.Decimal(activeNumberLine);
             InputCapture(output);
         }
 
         private void btn_sign_Click(object sender, EventArgs e)
         {
-
-            activeNumberInputLine = calculator.PlusMinus(activeNumberInputLine);
+            activeNumberLine = calculator.PlusMinus(activeNumberLine);
             DisplayValues();
         }
 
@@ -106,40 +106,45 @@ namespace _200443133A2
 
         private void btn_mr_Click(object sender, EventArgs e)
         {
+            DisplayValues();
             memory = calculator.MemoryRecall();
             if (!double.IsNaN(memory))
-            {
-                if (txt_display.Text != "")
+            {/*
+                if ( formulaLine != "")
                 {
-                    string last_char = txt_display.Text.Substring(txt_display.Text.Length - 1, 1);
+                    string last_char = formulaLine.Substring(formulaLine.Length - 1, 1);
 
                     if (last_char == "+" || last_char == "-" || last_char == "x" || last_char == "/")
                     {
                     }
                     else
                     {
-                        txt_display.Text += "+";
+                        formulaLine += "+";
                     }
-                }
+                } */
 
-                txt_display.Text += memory.ToString();
-
+                activeNumberLine = memory.ToString();
+                screenReset = true;
             }
             DisplayValues();
         }
 
         private void btn_ms_Click(object sender, EventArgs e)
         {
-            result = calculator.Calculate(txt_display.Text);
-            txt_display.Text = result.ToString();
-            calculator.MemorySave(result);
-           
-            txt_memory.Text = "M";
-            DisplayValues();
+            Equals();
+
+            if (activeNumberLine != "")
+            {
+                calculator.MemorySave(Convert.ToDouble(activeNumberLine));
+                txt_memory.Text = "M";
+            }
+
+            
         }
 
         private void btn_mPlus_Click(object sender, EventArgs e)
         {
+            DisplayValues();
             result = calculator.Calculate(txt_display.Text);
             txt_display.Text = result.ToString();
             calculator.MemoryPlus(result);
@@ -171,13 +176,16 @@ namespace _200443133A2
         {
             result = calculator.SquareRoot(txt_display.Text);
             txt_display.Text = result.ToString();
+            screenReset = true;
         }
 
         private void btn_invert_Click(object sender, EventArgs e)
         {
-            result = calculator.Invert(txt_display.Text);
-            txt_display.Text = result.ToString();
             DisplayValues();
+            double invertResult = calculator.Invert(txt_display.Text);
+            activeNumberLine = invertResult.ToString();
+            DisplayValues();
+            screenReset = true;
         }
 
         private void btn_equals_Click(object sender, EventArgs e)
@@ -186,18 +194,17 @@ namespace _200443133A2
         }
 
        
-        bool screenReset = false;
         public void InputCapture(string i)
         {
             string[] allOperators = { "+", "-", "/", "*", "^", "(", ")" };
             string[] neighbourOperators = { "+", "/", "*", ".", "^", "-" };
-            string[] startingOperators = { "+", "/", "*", "^" };
+            string[] startingOperators = { "+", "/", "*", "^", ")" };
             
 
             if (allOperators.Contains(i))
             //If operator is pressed
             {
-                if (activeNumberInputLine == "")
+                if (activeNumberLine == "")
                 {
                     if (formulaLine == "" && startingOperators.Contains(i))
                     {
@@ -206,23 +213,55 @@ namespace _200443133A2
                     else if (formulaLine != "")
                     {
                         string lastInput = formulaLine.Substring(formulaLine.Length - 1); //
-                        if (neighbourOperators.Contains(lastInput))
+                        if (neighbourOperators.Contains(lastInput) && i != "(" )
                         {
                             InputBackLine1();
                         }
+                        if (lastInput == ")" && !neighbourOperators.Contains(i))
+                        {
+                            formulaLine += "*";
+                        }
+                        lastInput = formulaLine.Substring(formulaLine.Length - 1); //
+                        if (i == "(" && !neighbourOperators.Contains(lastInput))
+                        {
+                            formulaLine += "*";
+                        }
+                        formulaLine += i;
+                    }
+                    else
+                    {
                         formulaLine += i;
                     }
                 }
                 else
                 {
-                    formulaLine += activeNumberInputLine + i;
+                    if (i == "(")
+                    {
+                        formulaLine += activeNumberLine + "*" + i;
+                    }
+                    else
+                    {
+                        formulaLine += activeNumberLine + i;
+                    }
                 }
-                activeNumberInputLine = "";
+                activeNumberLine = "";
+                screenReset = false;
             }
             else
             //If Anything else is pressed (numbers)
             {
-                activeNumberInputLine += i;
+                if (screenReset == true)
+                {
+                    activeNumberLine = "";
+                    screenReset = false;
+                }
+
+                if ( formulaLine != "" && formulaLine.Substring(formulaLine.Length - 1) == ")")
+                {
+                    formulaLine += "*";
+                }
+
+                activeNumberLine += i;
             }
 
             DisplayValues();
@@ -232,7 +271,7 @@ namespace _200443133A2
         public void DisplayValues()
         {
 
-            txt_display.Text = formulaLine+activeNumberInputLine;
+            txt_display.Text = formulaLine+activeNumberLine;
             txt_display.Focus();
             txt_display.DeselectAll();
         }
@@ -247,9 +286,9 @@ namespace _200443133A2
         }
         public void InputBackLine2()
         {
-            if (activeNumberInputLine != "")
+            if (activeNumberLine != "")
             {
-                activeNumberInputLine = activeNumberInputLine.Remove(activeNumberInputLine.Length - 1);
+                activeNumberLine = activeNumberLine.Remove(activeNumberLine.Length - 1);
                 DisplayValues();
             }
             else
@@ -262,7 +301,7 @@ namespace _200443133A2
         {
             txt_display.Clear();
             formulaLine = "";
-            activeNumberInputLine = "";
+            activeNumberLine = "";
             txt_memory.Clear();
             calculator.MemoryClear();
             DisplayValues();
@@ -272,15 +311,38 @@ namespace _200443133A2
         public void Equals()
         {
             DisplayValues();
-            result = calculator.Calculate(txt_display.Text);
+            if (activeNumberLine == "")
+            {
+                string[] neighbourOperators = { "+", "/", "*", ".", "^", "-", "(" };
+
+                string lastInput = formulaLine.Substring(formulaLine.Length - 1);
+                if (neighbourOperators.Contains(lastInput))
+                {
+                    txt_display.Text = "Formula Not Complete";
+                    return;     //Blocks user from trying to calculate incomplete formula
+                }
+            }
+
+            try
+            {
+                result = calculator.Calculate(txt_display.Text);
+            }
+            catch 
+            {
+                txt_display.Text = "Not A Formula";
+                return;
+            }
 
             if (double.IsNaN(result) || double.IsInfinity(result) || double.IsNegativeInfinity(result) || double.IsPositiveInfinity(result))
             {
                 txt_display.Text = "Cannot divide by 0";
+                formulaLine = "";
+                activeNumberLine = "";
+                return;
             }
             else
             {
-                activeNumberInputLine = result.ToString();
+                activeNumberLine = result.ToString();
             }
 
             formulaLine = "";
@@ -328,18 +390,18 @@ namespace _200443133A2
             
             if (Control.ModifierKeys == Keys.Shift)
             {
-               /* if (e.KeyCode == Keys.D0)
+                if (e.KeyCode == Keys.D0)
                 {
                     InputCapture(")");
-                }*/
+                }
                 if (e.KeyCode == Keys.D8)
                 {
                     InputCapture("*");
                 }
-               /* if (e.KeyCode == Keys.D9)
+                if (e.KeyCode == Keys.D9)
                 {
                     InputCapture("(");
-                }*/
+                }
                 if (e.KeyCode == Keys.Oemplus)
                 {
                     InputCapture("+");
@@ -440,14 +502,14 @@ namespace _200443133A2
             {
                 Equals();
             }
-           /* if (e.KeyCode == Keys.OemOpenBrackets)
+            if (e.KeyCode == Keys.OemOpenBrackets)
             {
-                InputCapture("("); ;
+                InputCapture("(");
             }
             if (e.KeyCode == Keys.Oem6)
             {
-                InputCapture(")"); ;
-            } */
+                InputCapture(")");
+            } 
             if (e.KeyCode == Keys.Escape)
             {
                 CalcReset();

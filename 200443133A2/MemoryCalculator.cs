@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace _200443133A2
 {
@@ -22,7 +23,6 @@ namespace _200443133A2
         public void MemorySave(double memoryInput)
         {
             memory = memoryInput;
-            
         }
 
         public double MemoryPlus(double memoryInput)
