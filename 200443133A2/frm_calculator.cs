@@ -184,7 +184,12 @@ namespace _200443133A2
         //Equals Button (=) click event
         private void btn_equals_Click(object sender, EventArgs e)
         {
-            Equals();
+            if (txt_display.Text != "") {
+                Equals();
+            }
+            else {
+                return;  //stop equals click input if display is empty
+            }
         }
 
        /// <summary>
@@ -204,7 +209,7 @@ namespace _200443133A2
 
             //*****Note:    ActiveNumberLine consists of the inputs being entered between operator presses
             //              FormulaLine consists of the history of inputs waiting to be calculated (the formula)
-            //              EG.   50*6-9+7:   FormulaLine = 50*6-9+   and ActiveLine = 7
+            //              EG.   "50*6-9+7":   FormulaLine = "50*6-9+"   and ActiveNumberLine = "7"
             //              This allows of easier input validation and handling, and for +/- insertion.
 
             //If an OPERATOR input is pressed...
@@ -609,7 +614,14 @@ namespace _200443133A2
             }
             if (e.KeyCode == Keys.Enter)
             {
-                Equals();
+                if (txt_display.Text != "")
+                {
+                    Equals();
+                }
+                else
+                {
+                    return;  //stops user from keying enter when display is blank
+                }
             }
             if (e.KeyCode == Keys.OemOpenBrackets)
             {
