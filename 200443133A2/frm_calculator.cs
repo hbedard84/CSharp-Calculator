@@ -80,8 +80,8 @@ namespace _200443133A2
         // Decimal Button (.) click event
         private void btn_decimal_Click(object sender, EventArgs e)
         {
-            string output = calculator.Decimal(activeNumberLine);
-            InputCapture(output);
+            string output = calculator.Decimal(activeNumberLine);  //validate decimal input
+            InputCapture(output);  //input ".", or input "" when "." is invalid
         }
         // Plus/Minus Button  (+/-) click event
         private void btn_sign_Click(object sender, EventArgs e)

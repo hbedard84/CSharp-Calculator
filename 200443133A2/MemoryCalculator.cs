@@ -9,7 +9,7 @@ namespace _200443133A2
 {
     class MemoryCalculator
     {
-        Double memory;
+        double memory;
 
         /// <summary>
         /// Clears the stored memory and sets the value to NaN (not a number) 
